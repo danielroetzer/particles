@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "astro": "^1.7.2"
+    "@astrojs/solid-js": "^1.2.3",
+    "astro": "^1.7.2",
+    "solid-js": "^1.4.3"
   }
 }
