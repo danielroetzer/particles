@@ -4,7 +4,14 @@ import './FloatyBalls.css';
 
 const roundedRandom = factor => Math.floor(Math.random() * factor);
 
-const colors = ['goldenrod', 'red', 'green', 'lightgray', 'blue', 'orange'];
+const colors = [
+    '#387ce5',
+    '#4b38e5',
+    '#a138e5',
+    '#e538d3',
+    '#e5387c',
+    '#e54b38',
+];
 
 const calculateStyle = function() {
     const size = roundedRandom(4);
