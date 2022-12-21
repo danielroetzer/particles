@@ -1,65 +1,40 @@
 import { createEffect, For, onMount } from "solid-js";
-import { floatyBalls } from "./store";
+import { floatyBalls, populateFloatyBalls } from "./store";
 import './styles.css';
 
 
-const roundedRandom = factor => Math.max(1, Math.floor(Math.random() * factor));
-
-const calculateStyle = function() {
-    const size = roundedRandom(4);
-    const color = floatyBalls.colors[roundedRandom(floatyBalls.colors.length)]
-
+const convertToStyle = function(props) {
     return `
-        top: ${roundedRandom(100)}vh;
-        left: ${roundedRandom(100)}vw;
-        background-color: ${color};
-        height: ${size}rem;
-        width: ${size}rem;
+        top: ${props.y}vh;
+        left: ${props.x}vw;
+        background-color: ${props.color};
+        height: ${props.size}rem;
+        width: ${props.size}rem;
     `;
 };
 
 const FloatyBall = function (props) {
-    const translateTo = {
-        x: roundedRandom(props.index % 2 === 0 ? -12 : 12),
-        y: roundedRandom(12),
-    };
-
-    const ballAnimationKeyframes = [
-        { transform: "translate(0, 0)" },
-        { transform: `translate(${translateTo.x}rem, ${translateTo.y}rem)` },
-    ];
-
-    const ballAnimationOptions = {
-        duration: 2000,
-        direction: "alternate",
-        iterations: Infinity,
-        easing: "ease-in-out",
-        fill: "both",
-    };
-
     let ballRef;
 
-    onMount(() => ballRef.animate(ballAnimationKeyframes, ballAnimationOptions));
-
-    createEffect(() => console.log('<FloatyBall /> rerendered:', props.index));
+    createEffect(() => console.log('<FloatyBall /> rerendered:', props.index, props.item));
+    onMount(() => ballRef.animate(props.item.animation.keyframes, props.item.animation.options));
 
     return (
-        <div class="floatyball" style={calculateStyle()} ref={ballRef}>
+        <div class="floatyball" style={convertToStyle(props.item)} ref={ballRef}>
             {props.index}
         </div>
     );
 };
 
-function FloatyBalls(props) {
-    let rootRef;
-
-    createEffect(() => console.log('rootRef', rootRef));
+function FloatyBalls() {
+    onMount(() => populateFloatyBalls({ count: 100 }));
 
     return (
-        <div class="root" ref={rootRef}>
+        <div class="root">
             <For each={floatyBalls.list}>
                 {(item, index) => <FloatyBall
                     index={index()}
+                    item={item}
                 />}
             </For>
         </div>
