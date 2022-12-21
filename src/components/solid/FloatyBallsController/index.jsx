@@ -4,12 +4,14 @@ import ColorPicker from './ColorPicker';
 const FloatyBallsController = function() {
     return (
         <>
-        <div>
-            <button onClick={removeLastFloatyBall}>Remove</button>
-            <button onClick={appendFloatyBall}>Add</button>
-            <button onClick={clearFloatyBalls}>Clear</button>
-        </div>
-        <ColorPicker />
+            <h2>Particles</h2>
+            <div>
+                <button onClick={removeLastFloatyBall}>Remove</button>
+                <button onClick={appendFloatyBall}>Add</button>
+                <button onClick={clearFloatyBalls}>Clear</button>
+            </div>
+            <h2>Colors</h2>
+            <ColorPicker />
         </>
     );
 };

@@ -52,8 +52,6 @@ export const populateFloatyBalls = function(props) {
                 (_, index) => calcFloatyBallProps({ index })
             );
 
-        console.log(items);
-
         return { list: items };
     });
 };
