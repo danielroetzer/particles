@@ -1,25 +1,18 @@
-import { For, onMount } from "solid-js";
-import './FloatyBalls.css';
+import { createEffect, For, onMount } from "solid-js";
+import { floatyBalls } from "./store";
+import './styles.css';
 
 
-const roundedRandom = factor => Math.floor(Math.random() * factor);
-
-const colors = [
-    '#387ce5',
-    '#4b38e5',
-    '#a138e5',
-    '#e538d3',
-    '#e5387c',
-    '#e54b38',
-];
+const roundedRandom = factor => Math.max(1, Math.floor(Math.random() * factor));
 
 const calculateStyle = function() {
     const size = roundedRandom(4);
+    const color = floatyBalls.colors[roundedRandom(floatyBalls.colors.length)]
 
     return `
         top: ${roundedRandom(100)}vh;
         left: ${roundedRandom(100)}vw;
-        background-color: ${colors[roundedRandom(colors.length)]};
+        background-color: ${color};
         height: ${size}rem;
         width: ${size}rem;
     `;
@@ -48,18 +41,28 @@ const FloatyBall = function (props) {
 
     onMount(() => ballRef.animate(ballAnimationKeyframes, ballAnimationOptions));
 
-    return <div class="floatyball" style={calculateStyle()} ref={ballRef} />;
+    createEffect(() => console.log('<FloatyBall /> rerendered:', props.index));
+
+    return (
+        <div class="floatyball" style={calculateStyle()} ref={ballRef}>
+            {props.index}
+        </div>
+    );
 };
 
 function FloatyBalls(props) {
+    let rootRef;
+
+    createEffect(() => console.log('rootRef', rootRef));
+
     return (
-        <>
-            <For each={Array.from(Array(100))}>
+        <div class="root" ref={rootRef}>
+            <For each={floatyBalls.list}>
                 {(item, index) => <FloatyBall
-                    index={index}
+                    index={index()}
                 />}
             </For>
-        </>
+        </div>
     );
 }
 
