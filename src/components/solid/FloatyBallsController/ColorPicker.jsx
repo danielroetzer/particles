@@ -1,4 +1,4 @@
-import { createEffect, Index, onMount } from "solid-js";
+import { batch, Index } from "solid-js";
 import { floatyBalls, setFloatyBalls } from '@components/solid/FloatyBalls/store';
 import { removeIndex } from "@utils/array";
 import { randomInt } from "@utils/math";
@@ -6,15 +6,19 @@ import { randomInt } from "@utils/math";
 const changeColor = function(itemIndex, newColor) {
     const oldColor = floatyBalls.colors[itemIndex];
 
-    setFloatyBalls('colors', itemIndex, newColor);
-    setFloatyBalls('list', item => item.color === oldColor, 'color', newColor);
+    batch(function() {
+        setFloatyBalls('colors', itemIndex, newColor);
+        setFloatyBalls('list', item => item.color === oldColor, 'color', newColor);
+    });
 };
 
 const deleteColor = function(itemIndex) {
     const oldColor = floatyBalls.colors[itemIndex];
 
-    setFloatyBalls('colors', colors => removeIndex(colors, itemIndex));
-    setFloatyBalls('list', item => item.color === oldColor, 'color', () => floatyBalls.colors[randomInt(0, floatyBalls.colors.length - 1)]);
+    batch(function() {
+        setFloatyBalls('colors', colors => removeIndex(colors, itemIndex));
+        setFloatyBalls('list', item => item.color === oldColor, 'color', () => floatyBalls.colors[randomInt(0, floatyBalls.colors.length - 1)]);
+    });
 };
 
 const addColor = () => setFloatyBalls('colors', floatyBalls.colors.length, '#eeeeee');
