@@ -16,7 +16,7 @@ const convertToStyle = function(props) {
 const FloatyBall = function (props) {
     let ballRef;
 
-    createEffect(() => console.log('<FloatyBall /> rerendered:', props.index, props.item));
+    // createEffect(() => console.log('<FloatyBall /> rerendered:', props.index, props.item));
     onMount(() => ballRef.animate(props.item.animation.keyframes, props.item.animation.options));
 
     return (

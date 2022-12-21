@@ -1,5 +1,5 @@
 import { createStore } from 'solid-js/store';
-import { roundedRandom } from '@utils/math';
+import { randomInt } from '@utils/math';
 
 export const [floatyBalls, setFloatyBalls] = createStore({
     colors: [
@@ -15,8 +15,8 @@ export const [floatyBalls, setFloatyBalls] = createStore({
 
 const calcFloatyBallProps = function({ index }) {
     const translateTo = {
-        x: roundedRandom(index % 2 === 0 ? -12 : 12),
-        y: roundedRandom(12),
+        x: randomInt(0, index % 2 === 0 ? -12 : 12),
+        y: randomInt(0, 12),
     };
 
     const keyframes = [
@@ -25,7 +25,7 @@ const calcFloatyBallProps = function({ index }) {
     ];
 
     const options = {
-        duration: (Math.random() + 1) * 2000,
+        duration: randomInt(1000, 3000),
         direction: 'alternate',
         iterations: Infinity,
         easing: 'ease-in-out',
@@ -33,10 +33,10 @@ const calcFloatyBallProps = function({ index }) {
     }
 
     return {
-        color: floatyBalls.colors[roundedRandom(floatyBalls.colors.length)],
-        size: roundedRandom(4),
-        x: roundedRandom(100),
-        y: roundedRandom(100),
+        color: floatyBalls.colors[randomInt(0, floatyBalls.colors.length - 1)],
+        size: randomInt(1, 6),
+        x: randomInt(0, 100),
+        y: randomInt(0, 100),
         animation: {
             keyframes,
             options,
