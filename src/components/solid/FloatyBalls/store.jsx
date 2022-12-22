@@ -10,7 +10,19 @@ export const [floatyBalls, setFloatyBalls] = createStore({
         '#e5387c',
         '#e54b38',
     ],
+    easing: 'ease-in-out',
+    size: {
+        min: 0.5,
+        max: 5,
+    },
     list: [],
+    showParticleIndex: false,
+    get colorCount() {
+        return this.colors.length;
+    },
+    get listCount() {
+        return this.list.length;
+    },
 });
 
 const calcFloatyBallProps = function({ index }) {
@@ -28,31 +40,45 @@ const calcFloatyBallProps = function({ index }) {
         duration: randomInt(1000, 3000),
         direction: 'alternate',
         iterations: Infinity,
-        easing: 'ease-in-out',
+        easing: floatyBalls.easing,
         fill: 'both',
     }
 
     return {
         color: floatyBalls.colors[randomInt(0, floatyBalls.colors.length - 1)],
-        size: randomFloat(0.5, 5),
+        size: randomFloat(floatyBalls.size.min, floatyBalls.size.max),
         x: randomInt(0, 100),
         y: randomInt(0, 100),
         animation: {
             keyframes,
             options,
+            subscription: null,
         },
     };
 }
 
 export const populateFloatyBalls = function(props) {
-    return setFloatyBalls(function(prev) {
-        const items = Array
-            .from(
-                { length: props.count ?? 10 },
-                (_, index) => calcFloatyBallProps({ index })
-            );
+    const population = Array.from(
+        { length: props.count ?? 10 },
+        (_, index) => calcFloatyBallProps({ index })
+    );
 
-        return { list: items };
+    return setFloatyBalls('list', population);
+};
+
+export const pauseAnimations = function() {
+    floatyBalls.list.forEach(function(item) {
+        if (item.animation.subscription.playState === 'paused') return;
+
+        item.animation.subscription.pause();
+    });
+};
+
+export const playAnimations = function() {
+    floatyBalls.list.forEach(function(item) {
+        if (item.animation.subscription.playState === 'running') return;
+
+        item.animation.subscription.play();
     });
 };
 

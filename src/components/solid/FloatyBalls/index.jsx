@@ -1,5 +1,5 @@
-import { createEffect, For, onMount } from "solid-js";
-import { floatyBalls, populateFloatyBalls } from "./store";
+import { createEffect, For, onMount, untrack } from "solid-js";
+import { floatyBalls, populateFloatyBalls, setFloatyBalls } from "./store";
 import './styles.css';
 
 
@@ -16,11 +16,18 @@ const convertToStyle = function(props) {
 const FloatyBall = function (props) {
     let ballRef;
 
-    onMount(() => ballRef.animate(props.item.animation.keyframes, props.item.animation.options));
+    // Cancel any already existing animation, before adding a new one.
+    // This should only run, when the animation signals update, so we untrack any other signals.
+    createEffect(function() {
+        untrack(() => floatyBalls.list[props.index].animation.subscription?.cancel());
+
+        const animation = ballRef.animate(props.item.animation.keyframes, props.item.animation.options);
+        setFloatyBalls('list', untrack(() => props.index), 'animation', 'subscription', animation);
+    });
 
     return (
         <div class="floatyball" style={convertToStyle(props.item)} ref={ballRef}>
-            {props.index}
+            {floatyBalls.showParticleIndex ? props.index : null}
         </div>
     );
 };
@@ -31,10 +38,7 @@ function FloatyBalls() {
     return (
         <div class="root">
             <For each={floatyBalls.list}>
-                {(item, index) => <FloatyBall
-                    index={index()}
-                    item={item}
-                />}
+                {(item, index) => <FloatyBall index={index()} item={item} />}
             </For>
         </div>
     );

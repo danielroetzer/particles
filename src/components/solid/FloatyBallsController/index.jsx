@@ -1,18 +1,27 @@
-import { appendFloatyBall, clearFloatyBalls, removeLastFloatyBall } from '@components/solid/FloatyBalls/store';
+import { floatyBalls, pauseAnimations, playAnimations } from '@components/solid/FloatyBalls/store';
 import ColorPicker from './ColorPicker';
+import EasingPicker from './EasingPicker';
+import Particles from './Particles';
 
 const FloatyBallsController = function() {
     return (
-        <>
-            <h2>Particles</h2>
-            <div>
-                <button onClick={removeLastFloatyBall}>Remove</button>
-                <button onClick={appendFloatyBall}>Add</button>
-                <button onClick={clearFloatyBalls}>Clear</button>
-            </div>
-            <h2>Colors</h2>
+        <div>
+            {/* todo: Find out why the initial population is not tracked */}
+            <h2>Particles ({floatyBalls.listCount})</h2>
+            <Particles />
+
+            <h2>Colors ({floatyBalls.colorCount})</h2>
             <ColorPicker />
-        </>
+
+            <h2>Animation</h2>
+            <div>
+                <button onClick={pauseAnimations}>Pause</button>
+                <button onClick={playAnimations}>Play</button>
+            </div>
+
+            <h2>Easing</h2>
+            <EasingPicker />
+        </div>
     );
 };
 
