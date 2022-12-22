@@ -1,4 +1,5 @@
-import { floatyBalls, pauseAnimations, playAnimations } from '@components/solid/FloatyBalls/store';
+import { floatyBalls } from '@components/solid/FloatyBalls/store';
+import Animation from './Animation';
 import ColorPicker from './ColorPicker';
 import EasingPicker from './EasingPicker';
 import Particles from './Particles';
@@ -14,10 +15,7 @@ const FloatyBallsController = function() {
             <ColorPicker />
 
             <h2>Animation</h2>
-            <div>
-                <button onClick={pauseAnimations}>Pause</button>
-                <button onClick={playAnimations}>Play</button>
-            </div>
+            <Animation />
 
             <h2>Easing</h2>
             <EasingPicker />

@@ -15,6 +15,10 @@ export const [floatyBalls, setFloatyBalls] = createStore({
         min: 0.5,
         max: 5,
     },
+    duration: {
+        min: 1000,
+        max: 3000,
+    },
     list: [],
     showParticleIndex: false,
     get colorCount() {
@@ -37,7 +41,7 @@ const calcFloatyBallProps = function({ index }) {
     ];
 
     const options = {
-        duration: randomInt(1000, 3000),
+        duration: randomInt(floatyBalls.duration.min, floatyBalls.duration.max),
         direction: 'alternate',
         iterations: Infinity,
         easing: floatyBalls.easing,
