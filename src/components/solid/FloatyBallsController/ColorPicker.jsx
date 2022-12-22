@@ -1,7 +1,7 @@
 import { batch, Index } from "solid-js";
 import { floatyBalls, setFloatyBalls } from '@components/solid/FloatyBalls/store';
 import { removeIndex } from "@utils/array";
-import { randomInt } from "@utils/math";
+import { randomInt, randomHexColor } from "@utils/math";
 
 const changeColor = function(itemIndex, newColor) {
     const oldColor = floatyBalls.colors[itemIndex];
@@ -21,7 +21,7 @@ const deleteColor = function(itemIndex) {
     });
 };
 
-const addColor = () => setFloatyBalls('colors', floatyBalls.colors.length, '#eeeeee');
+const addColor = () => setFloatyBalls('colors', floatyBalls.colors.length, randomHexColor());
 
 const Color = function(props) {
     return (
