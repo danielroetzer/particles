@@ -25,28 +25,42 @@ const addColor = () => setFloatyBalls('colors', floatyBalls.colors.length, rando
 
 const Color = function(props) {
     return (
-        <div>
+        <div class="flexrow">
+            <label for={`colorpicker-${props.index}`} class="pointer">Adjust color {props.index}:</label>
             <input
                 type="color"
+                id={`colorpicker-${props.index}`}
                 name={`colorpicker-${props.index}`}
                 value={props.value}
                 onInput={e => changeColor(props.index, e.currentTarget.value)}
             />
-            <button disabled={floatyBalls.colors.length <= 1} onClick={() => deleteColor(props.index)}>Delete</button>
+            <button
+                disabled={floatyBalls.colorCount <= 1}
+                onClick={() => deleteColor(props.index)}
+            >
+                Delete
+            </button>
         </div>
     )
 };
 
 const ColorPicker = function() {
     return (
-        <div>
+        <>
+            <div class="flexrow">
+                <button
+                    disabled={floatyBalls.colorCount >= 10}
+                    onClick={addColor}
+                >
+                    Add color
+                </button>
+            </div>
             {/* With `<Index>` the child elements won't re-rerender, if the color value changes.
                 This is required, because rendering closes the native input color picker */}
             <Index each={floatyBalls.colors}>
                 {(value, index) => <Color value={value()} index={index} />}
             </Index>
-            <button onClick={addColor}>New</button>
-        </div>
+        </>
     );
 };
 

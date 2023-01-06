@@ -18,7 +18,7 @@ const changeEasing = function(newValue) {
 
 const Easing = function(props) {
     return (
-        <div>
+        <div class="flexrow">
             <input
                 type="radio"
                 name="easing"
@@ -27,18 +27,18 @@ const Easing = function(props) {
                 checked={floatyBalls.easing === props.value}
                 onClick={e => changeEasing(e.currentTarget.value)}
             />
-            <label for={`radio-${props.value}`}>{props.value}</label>
+            <label for={`radio-${props.value}`} class="pointer">{props.value}</label>
         </div>
     )
 };
 
 const EasingPicker = function() {
     return (
-        <div>
+        <>
             <For each={easings}>
                 {value => <Easing value={value} />}
             </For>
-        </div>
+        </>
     );
 };
 

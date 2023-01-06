@@ -21,6 +21,7 @@ export const [floatyBalls, setFloatyBalls] = createStore({
     },
     list: [],
     showParticleIndex: false,
+    areAnimationsPaused: false,
     get colorCount() {
         return this.colors.length;
     },
@@ -76,6 +77,8 @@ export const pauseAnimations = function() {
 
         item.animation.subscription.pause();
     });
+
+    setFloatyBalls('areAnimationsPaused', true);
 };
 
 export const playAnimations = function() {
@@ -84,6 +87,8 @@ export const playAnimations = function() {
 
         item.animation.subscription.play();
     });
+
+    setFloatyBalls('areAnimationsPaused', false);
 };
 
 export const appendFloatyBall = function() {

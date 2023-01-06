@@ -1,6 +1,6 @@
 import { createEffect, For, onMount, untrack } from "solid-js";
 import { floatyBalls, populateFloatyBalls, setFloatyBalls } from "./store";
-import './styles.css';
+import styles from './styles.module.css';
 
 
 const convertToStyle = function(props) {
@@ -26,17 +26,17 @@ const FloatyBall = function (props) {
     });
 
     return (
-        <div class="floatyball" style={convertToStyle(props.item)} ref={ballRef}>
+        <div class={styles.floatyball} style={convertToStyle(props.item)} ref={ballRef}>
             {floatyBalls.showParticleIndex ? props.index : null}
         </div>
     );
 };
 
 function FloatyBalls() {
-    onMount(() => populateFloatyBalls({ count: 100 }));
+    onMount(() => populateFloatyBalls({ count: 150 }));
 
     return (
-        <div class="root">
+        <div class={styles.root}>
             <For each={floatyBalls.list}>
                 {(item, index) => <FloatyBall index={index()} item={item} />}
             </For>

@@ -36,48 +36,64 @@ const changeMaxDuration = function(newValue) {
     });
 };
 
+const millisecondsToSeconds = ms => (ms / 1000).toFixed(1);
+
 const DurationSlider = function() {
     return (
-        <div class="duration">
-            <label for="duration-min">Minimum duration (in milliseconds):</label>
-            <input
-                type="range"
-                id="duration-min"
-                name="duration-min"
-                min="100"
-                step="100"
-                max={floatyBalls.duration.max}
-                value={floatyBalls.duration.min}
-                onInput={e => changeMinDuration(e.currentTarget.value)}
-            />
-            <span>{floatyBalls.duration.min}</span>
-            <br />
+        <>
+            <div className="flexrow">
+                <label for="duration-min">Minimum duration</label>
+                <input
+                    type="range"
+                    id="duration-min"
+                    name="duration-min"
+                    min="200"
+                    step="100"
+                    max={floatyBalls.duration.max}
+                    value={floatyBalls.duration.min}
+                    onInput={e => changeMinDuration(e.currentTarget.value)}
+                />
+                <span>{millisecondsToSeconds(floatyBalls.duration.min)}s</span>
+            </div>
 
-            <label for="duration-max">Maximum duration (in milliseconds):</label>
-            <input
-                type="range"
-                id="duration-max"
-                name="duration-max"
-                min={floatyBalls.duration.min}
-                step="100"
-                max="5000"
-                value={floatyBalls.duration.max}
-                onInput={e => changeMaxDuration(e.currentTarget.value)}
-            />
-            <span>{floatyBalls.duration.max}</span>
-        </div>
+            <div className="flexrow">
+                <label for="duration-max">Maximum duration:</label>
+                <input
+                    type="range"
+                    id="duration-max"
+                    name="duration-max"
+                    min={floatyBalls.duration.min}
+                    step="100"
+                    max="5000"
+                    value={floatyBalls.duration.max}
+                    onInput={e => changeMaxDuration(e.currentTarget.value)}
+                />
+                <span>{millisecondsToSeconds(floatyBalls.duration.max)}s</span>
+            </div>
+        </>
     )
+};
+
+const PausePlayButton = function() {
+    const onClickProxy = e => floatyBalls.areAnimationsPaused
+        ? playAnimations(e)
+        : pauseAnimations(e);
+
+    return (
+        <div class="flexrow">
+            <button onClick={onClickProxy}>
+                {floatyBalls.areAnimationsPaused ? 'Play' : 'Pause'}
+            </button>
+        </div>
+    );
 };
 
 const Animation = function() {
     return (
-        <div>
-            <button onClick={pauseAnimations}>Pause</button>
-            <button onClick={playAnimations}>Play</button>
-            <br />
-
+        <>
+            <PausePlayButton />
             <DurationSlider />
-        </div>
+        </>
     );
 };
 
