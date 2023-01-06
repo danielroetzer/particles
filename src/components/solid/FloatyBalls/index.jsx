@@ -1,5 +1,5 @@
-import { createEffect, For, onMount, untrack } from "solid-js";
-import { floatyBalls, populateFloatyBalls, setFloatyBalls } from "./store";
+import { batch, createEffect, For, onMount, untrack } from "solid-js";
+import { floatyBalls, initRandomColors, populateFloatyBalls, setFloatyBalls } from "./store";
 import FloatyBallsController from '@components/solid/FloatyBallsController';
 import styles from './styles.module.css';
 
@@ -34,7 +34,12 @@ const FloatyBall = function (props) {
 };
 
 function FloatyBalls() {
-    onMount(() => populateFloatyBalls({ count: 150 }));
+    onMount(function() {
+        batch(function() {
+            initRandomColors();
+            populateFloatyBalls();
+        });
+    });
 
     return (
         <div class={styles.root}>
