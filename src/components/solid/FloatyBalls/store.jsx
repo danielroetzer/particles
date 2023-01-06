@@ -96,6 +96,8 @@ export const appendFloatyBall = function() {
 };
 
 export const removeLastFloatyBall = function() {
+    if (floatyBalls.listCount === 0) return;
+
     return setFloatyBalls('list', prev => prev.slice(0, prev.length - 1));
 };
 

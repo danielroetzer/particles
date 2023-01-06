@@ -63,7 +63,7 @@ const Particles = function() {
         <>
             <div class="flexrow">
                 <button onClick={appendFloatyBall}>Add 1</button>
-                <button onClick={removeLastFloatyBall}>Remove 1</button>
+                <button onClick={removeLastFloatyBall} disabled={floatyBalls.listCount === 0}>Remove 1</button>
                 <button onClick={clearFloatyBalls}>Remove all</button>
             </div>
 

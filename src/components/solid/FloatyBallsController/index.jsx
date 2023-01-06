@@ -19,7 +19,6 @@ const FloatyBallsController = function() {
 
             <Show when={show()}>
                 <div class={styles.controller}>
-                    {/* todo: Find out why the initial population is not tracked properly */}
                     <h2 class={styles.header}>Particles ({floatyBalls.listCount})</h2>
                     <Particles />
                 </div>

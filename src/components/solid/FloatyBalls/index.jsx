@@ -1,5 +1,6 @@
 import { createEffect, For, onMount, untrack } from "solid-js";
 import { floatyBalls, populateFloatyBalls, setFloatyBalls } from "./store";
+import FloatyBallsController from '@components/solid/FloatyBallsController';
 import styles from './styles.module.css';
 
 
@@ -40,6 +41,8 @@ function FloatyBalls() {
             <For each={floatyBalls.list}>
                 {(item, index) => <FloatyBall index={index()} item={item} />}
             </For>
+
+            <FloatyBallsController />
         </div>
     );
 }
