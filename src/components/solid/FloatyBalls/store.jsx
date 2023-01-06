@@ -1,5 +1,4 @@
 import { createStore } from 'solid-js/store';
-import { isServer } from "solid-js/web";
 import { randomFloat, randomHexColor, randomInt } from '@utils/math';
 
 export const [floatyBalls, setFloatyBalls] = createStore({
