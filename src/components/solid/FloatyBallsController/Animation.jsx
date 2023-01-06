@@ -41,7 +41,7 @@ const millisecondsToSeconds = ms => (ms / 1000).toFixed(1);
 const DurationSlider = function() {
     return (
         <>
-            <div className="flexrow">
+            <div class="flexrow">
                 <label for="duration-min">Minimum duration</label>
                 <input
                     type="range"
@@ -56,7 +56,7 @@ const DurationSlider = function() {
                 <span>{millisecondsToSeconds(floatyBalls.duration.min)}s</span>
             </div>
 
-            <div className="flexrow">
+            <div class="flexrow">
                 <label for="duration-max">Maximum duration:</label>
                 <input
                     type="range"
