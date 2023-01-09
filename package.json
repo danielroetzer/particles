@@ -15,7 +15,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "prettier": "prettier ."
+    "format": "prettier -w ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^1.0.0",
