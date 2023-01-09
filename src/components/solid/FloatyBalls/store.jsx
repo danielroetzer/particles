@@ -23,14 +23,14 @@ export const [floatyBalls, setFloatyBalls] = createStore({
     },
 });
 
-const calcFloatyBallProps = function({ index }) {
+const calcFloatyBallProps = function ({ index }) {
     const translateTo = {
         x: randomInt(0, index % 2 === 0 ? -12 : 12),
         y: randomInt(0, 12),
     };
 
     const keyframes = [
-        { transform: "translate(0, 0)" },
+        { transform: 'translate(0, 0)' },
         { transform: `translate(${translateTo.x}rem, ${translateTo.y}rem)` },
     ];
 
@@ -40,7 +40,7 @@ const calcFloatyBallProps = function({ index }) {
         iterations: Infinity,
         easing: floatyBalls.easing,
         fill: 'both',
-    }
+    };
 
     return {
         color: floatyBalls.colors[randomInt(0, floatyBalls.colors.length - 1)],
@@ -53,28 +53,26 @@ const calcFloatyBallProps = function({ index }) {
             subscription: null,
         },
     };
-}
+};
 
-export const initRandomColors = function(props = {}) {
-    const colors = Array.from(
-        { length: props.count ?? 5 },
-        () => randomHexColor()
+export const initRandomColors = function (props = {}) {
+    const colors = Array.from({ length: props.count ?? 5 }, () =>
+        randomHexColor()
     );
 
     return setFloatyBalls('colors', colors);
 };
 
-export const populateFloatyBalls = function(props = {}) {
-    const population = Array.from(
-        { length: props.count ?? 150 },
-        (_, index) => calcFloatyBallProps({ index })
+export const populateFloatyBalls = function (props = {}) {
+    const population = Array.from({ length: props.count ?? 150 }, (_, index) =>
+        calcFloatyBallProps({ index })
     );
 
     return setFloatyBalls('list', population);
 };
 
-export const pauseAnimations = function() {
-    floatyBalls.list.forEach(function(item) {
+export const pauseAnimations = function () {
+    floatyBalls.list.forEach(function (item) {
         if (item.animation.subscription.playState === 'paused') return;
 
         item.animation.subscription.pause();
@@ -83,8 +81,8 @@ export const pauseAnimations = function() {
     setFloatyBalls('areAnimationsPaused', true);
 };
 
-export const playAnimations = function() {
-    floatyBalls.list.forEach(function(item) {
+export const playAnimations = function () {
+    floatyBalls.list.forEach(function (item) {
         if (item.animation.subscription.playState === 'running') return;
 
         item.animation.subscription.play();
@@ -93,16 +91,19 @@ export const playAnimations = function() {
     setFloatyBalls('areAnimationsPaused', false);
 };
 
-export const appendFloatyBall = function() {
-    return setFloatyBalls('list', prev => [...prev, calcFloatyBallProps({ index: prev.length, })])
+export const appendFloatyBall = function () {
+    return setFloatyBalls('list', prev => [
+        ...prev,
+        calcFloatyBallProps({ index: prev.length }),
+    ]);
 };
 
-export const removeLastFloatyBall = function() {
+export const removeLastFloatyBall = function () {
     if (floatyBalls.listCount === 0) return;
 
     return setFloatyBalls('list', prev => prev.slice(0, prev.length - 1));
 };
 
-export const clearFloatyBalls = function() {
+export const clearFloatyBalls = function () {
     return setFloatyBalls('list', []);
 };
