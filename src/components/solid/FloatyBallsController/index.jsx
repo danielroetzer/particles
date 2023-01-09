@@ -6,7 +6,7 @@ import Particles from './Particles';
 import styles from './index.module.css';
 import { createSignal, Show } from 'solid-js';
 
-const FloatyBallsController = function() {
+const FloatyBallsController = function () {
     const [show, setShow] = createSignal(true);
 
     return (
@@ -19,12 +19,16 @@ const FloatyBallsController = function() {
 
             <Show when={show()}>
                 <div class={styles.controller}>
-                    <h2 class={styles.header}>Particles ({floatyBalls.listCount})</h2>
+                    <h2 class={styles.header}>
+                        Particles ({floatyBalls.listCount})
+                    </h2>
                     <Particles />
                 </div>
 
                 <div class={styles.controller}>
-                    <h2 class={styles.header}>Colors ({floatyBalls.colorCount})</h2>
+                    <h2 class={styles.header}>
+                        Colors ({floatyBalls.colorCount})
+                    </h2>
                     <ColorPicker />
                 </div>
 

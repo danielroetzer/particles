@@ -1,28 +1,44 @@
-import { batch } from "solid-js";
-import { appendFloatyBall, clearFloatyBalls, removeLastFloatyBall, floatyBalls, setFloatyBalls } from '@components/solid/FloatyBalls/store';
+import { batch } from 'solid-js';
+import {
+    appendFloatyBall,
+    clearFloatyBalls,
+    removeLastFloatyBall,
+    floatyBalls,
+    setFloatyBalls,
+} from '@components/solid/FloatyBalls/store';
 
-
-const changeMinSize = function(newValue) {
+const changeMinSize = function (newValue) {
     const parsedValue = parseFloat(newValue);
 
-    batch(function() {
+    batch(function () {
         setFloatyBalls('size', 'min', parsedValue);
-        setFloatyBalls('list', item => item.size < parsedValue, 'size', parsedValue);
+        setFloatyBalls(
+            'list',
+            item => item.size < parsedValue,
+            'size',
+            parsedValue
+        );
     });
 };
 
-const changeMaxSize = function(newValue) {
+const changeMaxSize = function (newValue) {
     const parsedValue = parseFloat(newValue);
 
-    batch(function() {
+    batch(function () {
         setFloatyBalls('size', 'max', parsedValue);
-        setFloatyBalls('list', item => item.size > parsedValue, 'size', parsedValue);
+        setFloatyBalls(
+            'list',
+            item => item.size > parsedValue,
+            'size',
+            parsedValue
+        );
     });
 };
 
-const toggleParticleIndex = () => setFloatyBalls('showParticleIndex', prev => !prev);
+const toggleParticleIndex = () =>
+    setFloatyBalls('showParticleIndex', prev => !prev);
 
-const Sizes = function() {
+const Sizes = function () {
     return (
         <>
             <div class="flexrow">
@@ -55,15 +71,20 @@ const Sizes = function() {
                 <span>{floatyBalls.size.max.toFixed(1)}rem</span>
             </div>
         </>
-    )
+    );
 };
 
-const Particles = function() {
+const Particles = function () {
     return (
         <>
             <div class="flexrow">
                 <button onClick={appendFloatyBall}>Add 1</button>
-                <button onClick={removeLastFloatyBall} disabled={floatyBalls.listCount === 0}>Remove 1</button>
+                <button
+                    onClick={removeLastFloatyBall}
+                    disabled={floatyBalls.listCount === 0}
+                >
+                    Remove 1
+                </button>
                 <button onClick={clearFloatyBalls}>Remove all</button>
             </div>
 
@@ -78,7 +99,9 @@ const Particles = function() {
                     checked={floatyBalls.showParticleIndex}
                     onChange={toggleParticleIndex}
                 />
-                <label for="particle-index" class="pointer">Show particle index</label>
+                <label for="particle-index" class="pointer">
+                    Show particle index
+                </label>
             </div>
         </>
     );
