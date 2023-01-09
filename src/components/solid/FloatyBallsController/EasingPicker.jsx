@@ -1,22 +1,19 @@
-import { batch, For } from "solid-js";
-import { floatyBalls, setFloatyBalls } from "@components/solid/FloatyBalls/store";
+import { batch, For } from 'solid-js';
+import {
+    floatyBalls,
+    setFloatyBalls,
+} from '@components/solid/FloatyBalls/store';
 
-const easings = [
-    'ease',
-    'linear',
-    'ease-in',
-    'ease-out',
-    'ease-in-out',
-];
+const easings = ['ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out'];
 
-const changeEasing = function(newValue) {
-    batch(function() {
+const changeEasing = function (newValue) {
+    batch(function () {
         setFloatyBalls('easing', newValue);
         setFloatyBalls('list', {}, 'animation', 'options', 'easing', newValue);
     });
 };
 
-const Easing = function(props) {
+const Easing = function (props) {
     return (
         <div class="flexrow">
             <input
@@ -27,17 +24,17 @@ const Easing = function(props) {
                 checked={floatyBalls.easing === props.value}
                 onClick={e => changeEasing(e.currentTarget.value)}
             />
-            <label for={`radio-${props.value}`} class="pointer">{props.value}</label>
+            <label for={`radio-${props.value}`} class="pointer">
+                {props.value}
+            </label>
         </div>
-    )
+    );
 };
 
-const EasingPicker = function() {
+const EasingPicker = function () {
     return (
         <>
-            <For each={easings}>
-                {value => <Easing value={value} />}
-            </For>
+            <For each={easings}>{value => <Easing value={value} />}</For>
         </>
     );
 };

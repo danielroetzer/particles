@@ -1,11 +1,15 @@
-import { batch } from "solid-js";
-import { floatyBalls, pauseAnimations, playAnimations, setFloatyBalls } from '@components/solid/FloatyBalls/store';
+import { batch } from 'solid-js';
+import {
+    floatyBalls,
+    pauseAnimations,
+    playAnimations,
+    setFloatyBalls,
+} from '@components/solid/FloatyBalls/store';
 
-
-const changeMinDuration = function(newValue) {
+const changeMinDuration = function (newValue) {
     const parsedValue = parseFloat(newValue);
 
-    batch(function() {
+    batch(function () {
         setFloatyBalls('duration', 'min', parsedValue);
 
         setFloatyBalls(
@@ -19,10 +23,10 @@ const changeMinDuration = function(newValue) {
     });
 };
 
-const changeMaxDuration = function(newValue) {
+const changeMaxDuration = function (newValue) {
     const parsedValue = parseFloat(newValue);
 
-    batch(function() {
+    batch(function () {
         setFloatyBalls('duration', 'max', parsedValue);
 
         setFloatyBalls(
@@ -38,7 +42,7 @@ const changeMaxDuration = function(newValue) {
 
 const millisecondsToSeconds = ms => (ms / 1000).toFixed(1);
 
-const DurationSlider = function() {
+const DurationSlider = function () {
     return (
         <>
             <div class="flexrow">
@@ -71,13 +75,14 @@ const DurationSlider = function() {
                 <span>{millisecondsToSeconds(floatyBalls.duration.max)}s</span>
             </div>
         </>
-    )
+    );
 };
 
-const PausePlayButton = function() {
-    const onClickProxy = e => floatyBalls.areAnimationsPaused
-        ? playAnimations(e)
-        : pauseAnimations(e);
+const PausePlayButton = function () {
+    const onClickProxy = e =>
+        floatyBalls.areAnimationsPaused
+            ? playAnimations(e)
+            : pauseAnimations(e);
 
     return (
         <div class="flexrow">
@@ -88,7 +93,7 @@ const PausePlayButton = function() {
     );
 };
 
-const Animation = function() {
+const Animation = function () {
     return (
         <>
             <PausePlayButton />
