@@ -15,7 +15,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier -w ."
+    "format": "prettier -w --plugin-search-dir=. ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^1.0.0",
