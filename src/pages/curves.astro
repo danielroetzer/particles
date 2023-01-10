@@ -1,8 +1,8 @@
 ---
 import CurvesLayout from '@layouts/Curves.astro';
+import Curves from '@components/svelte/Curves/index.svelte';
 ---
 
 <CurvesLayout>
-    curves
+    <Curves client:load />
 </CurvesLayout>
-

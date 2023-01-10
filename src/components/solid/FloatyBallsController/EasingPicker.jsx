@@ -1,10 +1,9 @@
 import { batch, For } from 'solid-js';
+import { easings } from '@utils/animation';
 import {
     floatyBalls,
     setFloatyBalls,
 } from '@components/solid/FloatyBalls/store';
-
-const easings = ['ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out'];
 
 const changeEasing = function (newValue) {
     batch(function () {
