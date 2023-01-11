@@ -5,7 +5,7 @@
         DurationY,
         EasingX,
         EasingY,
-    } from './stores';
+    } from '@components/svelte/LayeredAnimation/AnimatedDot/stores';
 
     import { easings, customEasings } from '@utils/animation';
 
