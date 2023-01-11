@@ -16,44 +16,61 @@
 </script>
 
 <div class="root">
-    <label for={`select-easing-${axis}`}>Easing {axis.toUpperCase()}:</label>
-    <select id={`select-easing-${axis}`} bind:value={$Easing}>
-        <optgroup label="Predefined easings">
-            {#each easings as easing}
-                <option
-                    value={easing}
-                    selected={easing === initialEasing[axis]}
-                >
-                    {easing}
-                </option>
-            {/each}
-        </optgroup>
+    <h2>{axis} axis options</h2>
 
-        <optgroup label="Custom bezier easings">
-            {#each Object.keys(customEasings) as id}
-                <option
-                    value={customEasings[id]}
-                    selected={customEasings[id] === initialEasing}
-                >
-                    {id}
-                </option>
-            {/each}
-        </optgroup>
-    </select>
+    <div>
+        <label for={`select-easing-${axis}`}>Easing:</label>
+        <select id={`select-easing-${axis}`} bind:value={$Easing}>
+            <optgroup label="Native">
+                {#each easings as easing}
+                    <option
+                        value={easing}
+                        selected={easing === initialEasing[axis]}
+                    >
+                        {easing}
+                    </option>
+                {/each}
+            </optgroup>
 
-    <label for={`range-duration-${axis}`}>Duration:</label>
-    <input
-        id={`range-duration-${axis}`}
-        type="range"
-        min="1"
-        max="10"
-        bind:value={$Duration}
-    />
+            <optgroup label="Custom">
+                {#each Object.keys(customEasings) as id}
+                    <option
+                        value={customEasings[id]}
+                        selected={customEasings[id] === initialEasing}
+                    >
+                        {id}
+                    </option>
+                {/each}
+            </optgroup>
+        </select>
+    </div>
+
+    <div>
+        <label for={`range-duration-${axis}`}>Duration:</label>
+        <input
+            id={`range-duration-${axis}`}
+            type="range"
+            min="0.5"
+            max="10"
+            step="0.5"
+            bind:value={$Duration}
+        />
+        <span>{$Duration.toFixed(1)}s</span>
+    </div>
 </div>
 
 <style>
     .root {
         display: flex;
         flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+    h2 {
+        margin-top: 0;
+        margin-bottom: 8px;
     }
 </style>

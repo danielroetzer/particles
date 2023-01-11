@@ -3,44 +3,35 @@
     import AnimatedDot from './AnimatedDot/index.svelte';
 </script>
 
-<div class="container">
-    <div class="controllers">
-        <Controller axis="x" />
-        <Controller axis="y" />
-    </div>
+<main class="layered-animation-root">
+    <Controller axis="x" />
+
+    <div class="spacer" />
 
     <div class="grids">
         <AnimatedDot axis="x" />
         <AnimatedDot />
         <AnimatedDot axis="y" />
     </div>
-</div>
+
+    <div class="spacer" />
+
+    <Controller axis="y" />
+</main>
 
 <style>
-    .container {
-        display: flex;
-        flex-direction: column;
-
-        gap: 40px;
-
+    .layered-animation-root {
         padding: 20px;
-
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+    }
+    .spacer {
+        margin-top: 40px;
     }
 
-    .controllers,
     .grids {
         display: flex;
-    }
+        justify-content: center;
+        flex-wrap: wrap;
 
-    .controllers {
-        justify-content: space-between;
-    }
-
-    .grids {
         gap: 40px;
     }
 </style>
