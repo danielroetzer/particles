@@ -10,6 +10,7 @@
 </script>
 
 <div class="root" style:--size={`${size}px`}>
+    <!-- The grid lines could be replaced by setting linear gradients on the background -->
     {#each columns as columnCount}
         <div class="column" style:left={calcPosition(columnCount)} />
     {/each}
