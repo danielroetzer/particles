@@ -1,60 +1,47 @@
 <script>
     import Grid from './Grid.svelte';
-    import { easings } from '@utils/animation';
-
-    let easingX = 'ease-in';
-    let easingY = 'ease-out';
-
-    // todo: bind these values to sliders
-    let durationX = 2.5;
-    let durationY = 2.5;
+    import Controller from './Controller.svelte';
+    import { DurationX, DurationY, EasingX, EasingY } from './stores';
 </script>
 
 <div class="container">
-    <select bind:value={easingX}>
-        {#each easings as easing}
-            <option value={easing}>
-                {easing}
-            </option>
-        {/each}
-    </select>
+    <div class="controllers">
+        <Controller axis="x" />
+        <Controller axis="y" />
+    </div>
 
-    <Grid>
-        <div
-            class="xAxis"
-            style:--easingX={easingX}
-            style:--durationX={`${durationX}s`}
-        />
-    </Grid>
-    <Grid>
-        <div
-            class="curve"
-            style:--easingX={easingX}
-            style:--easingY={easingY}
-            style:--durationX={`${durationX}s`}
-            style:--durationY={`${durationY}s`}
-        />
-    </Grid>
-    <Grid>
-        <div
-            class="yAxis"
-            style:--easingY={easingY}
-            style:--durationY={`${durationY}s`}
-        />
-    </Grid>
+    <div class="grids">
+        <Grid>
+            <div
+                class="xAxis"
+                style:--easingX={$EasingX}
+                style:--durationX={`${$DurationX}s`}
+            />
+        </Grid>
+        <Grid>
+            <div
+                class="yAxis"
+                style:--easingY={$EasingY}
+                style:--durationY={`${$DurationY}s`}
+            />
+        </Grid>
 
-    <select bind:value={easingY}>
-        {#each easings as easing}
-            <option value={easing}>
-                {easing}
-            </option>
-        {/each}
-    </select>
+        <Grid>
+            <div
+                class="curve"
+                style:--easingX={$EasingX}
+                style:--easingY={$EasingY}
+                style:--durationX={`${$DurationX}s`}
+                style:--durationY={`${$DurationY}s`}
+            />
+        </Grid>
+    </div>
 </div>
 
 <style>
     .container {
         display: flex;
+        flex-direction: column;
 
         gap: 40px;
 
@@ -64,6 +51,19 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    .controllers,
+    .grids {
+        display: flex;
+    }
+
+    .controllers {
+        justify-content: space-between;
+    }
+
+    .grids {
+        gap: 40px;
     }
 
     .xAxis,
