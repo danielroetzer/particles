@@ -20,18 +20,17 @@
         </Grid>
         <Grid>
             <div
-                class="yAxis"
-                style:--easingY={$EasingY}
-                style:--durationY={`${$DurationY}s`}
-            />
-        </Grid>
-
-        <Grid>
-            <div
                 class="curve"
                 style:--easingX={$EasingX}
                 style:--easingY={$EasingY}
                 style:--durationX={`${$DurationX}s`}
+                style:--durationY={`${$DurationY}s`}
+            />
+        </Grid>
+        <Grid>
+            <div
+                class="yAxis"
+                style:--easingY={$EasingY}
                 style:--durationY={`${$DurationY}s`}
             />
         </Grid>

@@ -7,25 +7,38 @@
         EasingY,
     } from './stores';
 
-    import { easings } from '@utils/animation';
+    import { easings, customEasings } from '@utils/animation';
 
     export let axis;
 
     const Duration = axis === 'x' ? DurationX : DurationY;
     const Easing = axis === 'x' ? EasingX : EasingY;
-
-    // $: console.log(axis, ':', $Duration);
-    // $: console.log(axis, ':', $Easing);
 </script>
 
 <div class="root">
-    <label for={`select-easing--${axis}`}>Easing {axis.toUpperCase()}:</label>
+    <label for={`select-easing-${axis}`}>Easing {axis.toUpperCase()}:</label>
     <select id={`select-easing-${axis}`} bind:value={$Easing}>
-        {#each easings as easing}
-            <option value={easing} selected={easing === initialEasing[axis]}>
-                {easing}
-            </option>
-        {/each}
+        <optgroup label="Predefined easings">
+            {#each easings as easing}
+                <option
+                    value={easing}
+                    selected={easing === initialEasing[axis]}
+                >
+                    {easing}
+                </option>
+            {/each}
+        </optgroup>
+
+        <optgroup label="Custom bezier easings">
+            {#each Object.keys(customEasings) as id}
+                <option
+                    value={customEasings[id]}
+                    selected={customEasings[id] === initialEasing}
+                >
+                    {id}
+                </option>
+            {/each}
+        </optgroup>
     </select>
 
     <label for={`range-duration-${axis}`}>Duration:</label>
