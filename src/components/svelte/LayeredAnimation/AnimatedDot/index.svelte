@@ -1,6 +1,6 @@
 <script>
     import Grid from './Grid.svelte';
-    import { DurationX, DurationY, EasingX, EasingY } from './stores';
+    import { DurationX, DurationY, EasingX, EasingY } from '../stores';
 
     export let size = 100;
     export let axis = 'combined';
