@@ -61,11 +61,14 @@ function FloatyBalls() {
     });
 
     return (
-        <div class={styles.root}>
-            <For each={floatyBalls.list}>
-                {(item, index) => <FloatyBall index={index()} item={item} />}
-            </For>
-
+        <div>
+            <div class={styles.root}>
+                <For each={floatyBalls.list}>
+                    {(item, index) => (
+                        <FloatyBall index={index()} item={item} />
+                    )}
+                </For>
+            </div>
             <FloatyBallsController />
         </div>
     );
