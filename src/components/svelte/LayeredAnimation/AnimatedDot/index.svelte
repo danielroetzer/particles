@@ -13,22 +13,22 @@
         {#if axis === 'x'}
             <div
                 class="xAxis"
-                style:--easingX={$EasingX}
-                style:--durationX={`${$DurationX}s`}
+                style:animation-duration={`${$DurationX}s`}
+                style:animation-timing-function={$EasingX}
             />
         {:else if axis === 'y'}
             <div
                 class="yAxis"
-                style:--easingY={$EasingY}
-                style:--durationY={`${$DurationY}s`}
+                style:animation-duration={`${$DurationY}s`}
+                style:animation-timing-function={$EasingY}
             />
         {:else}
             <div
                 class="combined"
-                style:--easingX={$EasingX}
-                style:--easingY={$EasingY}
                 style:--durationX={`${$DurationX}s`}
                 style:--durationY={`${$DurationY}s`}
+                style:--easingX={$EasingX}
+                style:--easingY={$EasingY}
             />
         {/if}
     </div>
@@ -54,6 +54,7 @@
     .xAxis,
     .yAxis,
     .combined::after {
+        background-color: black;
         width: 20px;
         height: 20px;
         border-radius: 100%;
@@ -67,25 +68,34 @@
         bottom: -10px;
     }
 
+    .xAxis,
+    .yAxis,
+    .combined,
+    .combined::after {
+        animation-iteration-count: infinite;
+    }
+
     .xAxis {
-        background-color: black;
-        animation: xAxis var(--durationX) infinite var(--easingX);
+        animation-name: xAxis;
     }
 
     .yAxis {
-        background-color: black;
-        animation: yAxis var(--durationY) infinite var(--easingY);
+        animation-name: yAxis;
     }
 
     .combined {
-        animation: xAxis var(--durationX) infinite var(--easingX);
+        animation-name: xAxis;
+        animation-duration: var(--durationX);
+        animation-timing-function: var(--easingX);
     }
 
     .combined::after {
         display: block;
         content: '';
-        background-color: black;
-        animation: yAxis var(--durationY) infinite var(--easingY);
+
+        animation-name: yAxis;
+        animation-duration: var(--durationY);
+        animation-timing-function: var(--easingY);
     }
 
     @keyframes xAxis {
