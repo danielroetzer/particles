@@ -11,9 +11,9 @@
 <input
     id={`range-duration-${axis}`}
     type="range"
-    min="0.5"
-    max="10"
-    step="0.5"
+    min="0.2"
+    max="8"
+    step="0.1"
     bind:value={$Duration}
 />
 
