@@ -8,11 +8,11 @@
 <div class="root">
     <h2>{axis} axis options</h2>
 
-    <div>
+    <div class="controller">
         <EasingSelect {axis} />
     </div>
 
-    <div>
+    <div class="controller">
         <DurationSlider {axis} />
     </div>
 </div>
@@ -21,14 +21,19 @@
     .root {
         display: flex;
         flex-direction: column;
-        /* justify-content: center; */
         align-items: center;
         width: 100%;
         gap: 10px;
     }
 
+    .controller {
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+    }
+
     h2 {
         margin-top: 0;
-        margin-bottom: 8px;
+        margin-bottom: 5px;
     }
 </style>

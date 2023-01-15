@@ -2,13 +2,20 @@
     import Grid from './Grid.svelte';
     import { DurationX, DurationY, EasingX, EasingY } from '../stores';
 
-    export let size = 100;
+    export let gridSize = 120;
+    export let cellsPerLine = 7;
     export let axis = 'combined';
+
+    const dotSize = gridSize / cellsPerLine;
 </script>
 
-<div class="container">
-    <div class="root" style:--size={`${size}px`}>
-        <Grid {size} />
+<div>
+    <div
+        class="root"
+        style:--gridSize={`${gridSize}px`}
+        style:--dotSize={`${dotSize}px`}
+    >
+        <Grid size={gridSize} {cellsPerLine} />
 
         {#if axis === 'x'}
             <div
@@ -36,27 +43,24 @@
 </div>
 
 <style>
+    .root {
+        position: relative;
+        height: var(--gridSize);
+        width: var(--gridSize);
+    }
+
     .legend {
         margin-top: 10px;
         text-align: center;
     }
 
-    .root {
-        position: relative;
-        height: var(--size);
-        width: var(--size);
-
-        background-color: white;
-
-        border: 1px solid gray;
-    }
-
     .xAxis,
     .yAxis,
     .combined::after {
-        background-color: black;
-        width: 20px;
-        height: 20px;
+        background-color: #f11313;
+        opacity: 0.8;
+        width: var(--dotSize);
+        height: var(--dotSize);
         border-radius: 100%;
     }
 
@@ -64,8 +68,8 @@
     .yAxis,
     .combined {
         position: absolute;
-        left: -10px;
-        bottom: -10px;
+        left: calc(var(--dotSize) / -2);
+        bottom: calc(var(--dotSize) / -2);
     }
 
     .xAxis,
@@ -100,13 +104,13 @@
 
     @keyframes xAxis {
         50% {
-            transform: translateX(100px);
+            transform: translateX(var(--gridSize));
         }
     }
 
     @keyframes yAxis {
         50% {
-            transform: translateY(-100px);
+            transform: translateY(calc(var(--gridSize) * -1));
         }
     }
 </style>

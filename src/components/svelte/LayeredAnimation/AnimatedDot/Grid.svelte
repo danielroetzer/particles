@@ -1,36 +1,40 @@
 <script>
     export let size;
+    export let cellsPerLine;
 
-    const rows = Array.from({ length: 4 }, (_, index) => index + 1);
-    const columns = rows;
-
-    const cellSize = size / 5;
-
-    const calcPosition = factor => `${factor * cellSize}px`;
+    const cells = Array.from({ length: cellsPerLine * cellsPerLine });
 </script>
 
-<!-- The inner grid lines could be replaced by setting linear gradients on the background -->
-{#each columns as columnCount}
-    <div class="column" style:left={calcPosition(columnCount)} />
-{/each}
-{#each rows as rowCount}
-    <div class="row" style:top={calcPosition(rowCount)} />
-{/each}
+<!--
+    To avoid creating so many empty <div /> elements, we could use linear gradients on the background.
+    However, the CSS grid guarantees us perfect equally sized cells.
+-->
+<div
+    class="grid"
+    style:--size={`${size}px`}
+    style:--cellsPerLine={cellsPerLine}
+>
+    {#each cells as _}
+        <div />
+    {/each}
+</div>
 
 <style>
-    .column,
-    .row {
-        background-color: gray;
-        position: absolute;
+    .grid {
+        position: relative;
+
+        width: var(--size);
+        height: var(--size);
+        display: grid;
+        grid-template-columns: repeat(var(--cellsPerLine), 1fr);
+        grid-template-rows: repeat(var(--cellsPerLine), 1fr);
+        gap: 1px;
+
+        border: 1px solid #777777;
+        background-color: #777777;
     }
 
-    .column {
-        height: 100%;
-        width: 1px;
-    }
-
-    .row {
-        height: 1px;
-        width: 100%;
+    .grid > * {
+        background-color: white;
     }
 </style>
