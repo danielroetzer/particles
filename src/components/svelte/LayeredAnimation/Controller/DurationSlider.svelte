@@ -1,5 +1,6 @@
 <script>
     import { DurationX, DurationY } from '../stores.js';
+    import { maxDuration, minDuration } from '../config.js';
 
     export let axis;
 
@@ -11,8 +12,8 @@
 <input
     id={`range-duration-${axis}`}
     type="range"
-    min="0.2"
-    max="8"
+    min={minDuration}
+    max={maxDuration}
     step="0.1"
     bind:value={$Duration}
 />

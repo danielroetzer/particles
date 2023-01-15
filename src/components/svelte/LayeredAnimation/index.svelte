@@ -1,6 +1,7 @@
 <script>
     import Controller from './Controller/index.svelte';
     import AnimatedDot from './AnimatedDot/index.svelte';
+    import { randomize } from './stores';
 </script>
 
 <main class="layered-animation-root">
@@ -14,6 +15,12 @@
         <AnimatedDot axis="y" />
     </div>
 
+    <div class="spacer" style:--size="20px" />
+
+    <div class="randomize">
+        <button on:click={randomize}>randomize options</button>
+    </div>
+
     <div class="spacer" />
 
     <Controller axis="y" />
@@ -23,8 +30,9 @@
     .layered-animation-root {
         padding: 20px;
     }
+
     .spacer {
-        margin-top: 40px;
+        margin-top: var(--size, 40px);
     }
 
     .grids {
@@ -33,5 +41,10 @@
         flex-wrap: wrap;
 
         gap: 40px;
+    }
+
+    .randomize {
+        display: flex;
+        justify-content: center;
     }
 </style>

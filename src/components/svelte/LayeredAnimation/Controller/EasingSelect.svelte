@@ -1,6 +1,5 @@
 <script>
     import { initialEasing, EasingX, EasingY } from '../stores.js';
-
     import { easings, customEasings } from '@utils/animation';
 
     export let axis;

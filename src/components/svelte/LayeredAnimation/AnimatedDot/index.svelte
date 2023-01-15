@@ -20,20 +20,20 @@
         {#if axis === 'x'}
             <div
                 class="xAxis"
-                style:animation-duration={`${$DurationX}s`}
+                style:animation-duration={`${$DurationX.toFixed(1)}s`}
                 style:animation-timing-function={$EasingX}
             />
         {:else if axis === 'y'}
             <div
                 class="yAxis"
-                style:animation-duration={`${$DurationY}s`}
+                style:animation-duration={`${$DurationY.toFixed(1)}s`}
                 style:animation-timing-function={$EasingY}
             />
         {:else}
             <div
                 class="combined"
-                style:--durationX={`${$DurationX}s`}
-                style:--durationY={`${$DurationY}s`}
+                style:--durationX={`${$DurationX.toFixed(1)}s`}
+                style:--durationY={`${$DurationY.toFixed(1)}s`}
                 style:--easingX={$EasingX}
                 style:--easingY={$EasingY}
             />
