@@ -23,7 +23,7 @@
         {#each Object.keys(customEasings) as id}
             <option
                 value={customEasings[id]}
-                selected={customEasings[id] === initialEasing}
+                selected={customEasings[id] === initialEasing[axis]}
             >
                 {id}
             </option>
@@ -32,4 +32,9 @@
 </select>
 
 <style>
+    select {
+        padding: 5px;
+
+        border-radius: 4px;
+    }
 </style>
