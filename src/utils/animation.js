@@ -14,7 +14,7 @@ export const bezierEasings = [
 // Copied from: https://easings.net/
 // There exists a postcss plugin, which converts the easing name to the corresponging bezier function, see: https://github.com/postcss/postcss-easings
 // However, this app updates easings dynamically with css variables, so the plugin wouldn't help in this case.
-// The plugin exports all the easing functions, but I prefer having them hardcoded here, since the plugin brings us no other use.
+// The plugin exports all the easing functions, but I prefer having them hardcoded here, since the plugin brings us no other benefit.
 export const customEasings = {
     'ease-in-sine': 'cubic-bezier(0.12, 0, 0.39, 0)',
     'ease-out-sine': 'cubic-bezier(0.61, 1, 0.88, 1)',
