@@ -1,5 +1,7 @@
 ---
 const { title } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -11,8 +13,8 @@ const { title } = Astro.props;
             name="description"
             content="Various particle effects as CSS animations"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/x-icon" href="/particles/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/x-icon" href={`${base}favicon.ico`} />
         <title>{title ?? 'Particles'}</title>
     </head>
     <body>
