@@ -2,9 +2,12 @@
   "editor.rulers": [80],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.documentSelectors": ["**/*.astro"],
+  "prettier.documentSelectors": ["**/*.astro", "**/*.svelte"],
   "prettier.configPath": ".prettierrc.cjs",
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
   }
 }

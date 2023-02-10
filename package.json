@@ -15,16 +15,20 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier -w ."
+    "format": "prettier -w --plugin-search-dir=. ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/solid-js": "^1.2.3",
+    "@astrojs/svelte": "^1.0.2",
     "astro": "^1.7.2",
-    "solid-js": "^1.4.3"
+    "solid-js": "^1.4.3",
+    "svelte": "^3.46.4"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.13",
     "prettier": "^2.8.2",
-    "prettier-plugin-astro": "^0.7.2"
+    "prettier-plugin-astro": "^0.7.2",
+    "prettier-plugin-svelte": "^2.9.0"
   }
 }
