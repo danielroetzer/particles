@@ -1,7 +1,9 @@
 ---
+import Navbar from '@components/astro/Navbar.astro';
+
 const { title } = Astro.props;
 
-const base = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -14,10 +16,11 @@ const base = import.meta.env.BASE_URL;
             content="Various particle effects as CSS animations"
         />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/x-icon" href={`${base}favicon.ico`} />
+        <link rel="icon" type="image/x-icon" href={`${baseUrl}favicon.ico`} />
         <title>{title ?? 'Particles'}</title>
     </head>
     <body>
+        <Navbar />
         <slot />
     </body>
 </html>

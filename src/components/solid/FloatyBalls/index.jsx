@@ -1,12 +1,14 @@
+import { Portal } from 'solid-js/web';
 import { batch, createEffect, For, onMount, untrack } from 'solid-js';
+import FloatyBallsController from '@components/solid/FloatyBallsController';
+import styles from './styles.module.css';
+
 import {
     floatyBalls,
     initRandomColors,
     populateFloatyBalls,
     setFloatyBalls,
 } from './store';
-import FloatyBallsController from '@components/solid/FloatyBallsController';
-import styles from './styles.module.css';
 
 const convertToStyle = function (props) {
     return `
@@ -61,16 +63,19 @@ function FloatyBalls() {
     });
 
     return (
-        <div>
-            <div class={styles.root}>
-                <For each={floatyBalls.list}>
-                    {(item, index) => (
-                        <FloatyBall index={index()} item={item} />
-                    )}
-                </For>
-            </div>
+        <>
+            <Portal>
+                <div class={styles.root}>
+                    <For each={floatyBalls.list}>
+                        {(item, index) => (
+                            <FloatyBall index={index()} item={item} />
+                        )}
+                    </For>
+                </div>
+            </Portal>
+
             <FloatyBallsController />
-        </div>
+        </>
     );
 }
 

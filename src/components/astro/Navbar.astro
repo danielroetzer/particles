@@ -1,0 +1,107 @@
+---
+import { Icon } from 'astro-icon';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const items = [
+    { href: '', name: 'Particles' },
+    { href: 'layered-animation/', name: 'Layered Animation' },
+].map(function (item) {
+    const href = `${baseUrl}${item.href}`;
+
+    return {
+        ...item,
+        href,
+        isActive: href === Astro.url.pathname,
+    };
+});
+
+const activeItemIndex = items.findIndex(item => item.isActive);
+
+const prevItem =
+    activeItemIndex === 0
+        ? items[items.length - 1]
+        : items[activeItemIndex - 1];
+
+const nextItem =
+    activeItemIndex === items.length - 1
+        ? items[0]
+        : items[activeItemIndex + 1];
+---
+
+<nav>
+    <div class="nav-items">
+        <a href={prevItem.href} rel="prefetch">
+            <!-- <Icon name="bi:arrow-left-circle" /> -->
+            <Icon name="ph:arrow-left-light" />
+        </a>
+
+        {
+            items.map(function ({ isActive, href, name }) {
+                return (
+                    <a
+                        href={href}
+                        class:list={{ active: isActive }}
+                        rel="prefetch"
+                    >
+                        {name}
+                    </a>
+                );
+            })
+        }
+
+        <a href={nextItem.href} rel="prefetch">
+            <Icon name="ph:arrow-right-light" />
+        </a>
+    </div>
+
+    <a
+        class="github"
+        href="https://github.com/danielroetzer/particles"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <Icon name="logos:github-icon" />
+    </a>
+</nav>
+
+<style>
+    :root {
+        --navbar-height: 50px;
+    }
+
+    nav {
+        padding: 0 20px;
+        height: var(--navbar-height);
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    svg {
+        display: block;
+        height: 20px;
+        width: 20px;
+    }
+
+    .nav-items {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-items a {
+        font-size: 18px;
+        text-decoration: none;
+        color: black;
+
+        padding: 0 2px;
+        margin: 0 2px;
+
+        white-space: nowrap;
+    }
+
+    .nav-items a.active {
+        text-decoration: underline;
+    }
+</style>
