@@ -31,8 +31,7 @@ const nextItem =
 
 <nav>
     <div class="nav-items">
-        <a href={prevItem.href} rel="prefetch">
-            <!-- <Icon name="bi:arrow-left-circle" /> -->
+        <a href={prevItem.href}>
             <Icon name="ph:arrow-left-light" />
         </a>
 
@@ -41,7 +40,7 @@ const nextItem =
                 return (
                     <a
                         href={href}
-                        class:list={{ active: isActive }}
+                        class:list={['nav-link', { active: isActive }]}
                         rel="prefetch"
                     >
                         {name}
