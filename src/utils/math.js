@@ -19,3 +19,7 @@ export const randomHexColor = function () {
 
     return `#${hex}`;
 };
+
+export const randomNegativeOrPositive = function () {
+    return Math.random() > 0.5 ? -1 : 1;
+};

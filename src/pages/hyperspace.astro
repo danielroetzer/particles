@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@layouts/Base.astro';
+import Hyperspace from '@components/svelte/Hyperspace/index.svelte';
+---
+
+<BaseLayout title="Hyperspace in CSS">
+    <Hyperspace client:load />
+</BaseLayout>
+
+<style is:global>
+    body {
+        background-color: #fefefe;
+    }
+</style>
