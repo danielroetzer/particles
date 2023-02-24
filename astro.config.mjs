@@ -8,5 +8,6 @@ import prefetch from '@astrojs/prefetch';
 export default defineConfig({
     site: 'https://danielroetzer.github.io',
     base: '/particles',
+    trailingSlash: 'always',
     integrations: [solidJs(), svelte(), sitemap(), prefetch()],
 });
