@@ -8,6 +8,7 @@ specifiers:
   astro: ^1.7.2
   astro-icon: ^0.8.0
   autoprefixer: ^10.4.13
+  d3-interpolate: ^3.0.1
   prettier: ^2.8.2
   prettier-plugin-astro: ^0.7.2
   prettier-plugin-svelte: ^2.9.0
@@ -21,6 +22,7 @@ dependencies:
   '@astrojs/svelte': 1.0.2_svelte@3.55.0
   astro: 1.7.2
   astro-icon: 0.8.0
+  d3-interpolate: 3.0.1
   solid-js: 1.6.5
   svelte: 3.55.0
 
@@ -1158,6 +1160,18 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+    dev: false
+
+  /d3-color/3.1.0:
+    resolution: {integrity: sha512-zg/chbXyeBtMQ1LbD/WSoW2DpC3I0mpmPdW+ynRTj/x2DAWYrIY7qeZIHidozwV24m4iavr15lNwIwLxRmOxhA==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /d3-interpolate/3.0.1:
+    resolution: {integrity: sha512-3bYs1rOD33uo8aqJfKP3JWPAibgw8Zm2+L9vBKEHJ2Rg+viTR7o5Mmv5mZcieN+FRYaAOWX5SJATX6k1PWz72g==}
+    engines: {node: '>=12'}
+    dependencies:
+      d3-color: 3.1.0
     dev: false
 
   /data-uri-to-buffer/4.0.0:
