@@ -4,7 +4,7 @@
     import { randomize } from './stores';
 </script>
 
-<main class="layered-animation-root">
+<main>
     <Controller axis="x" />
 
     <div class="spacer" />
@@ -27,7 +27,7 @@
 </main>
 
 <style>
-    .layered-animation-root {
+    main {
         padding: 20px;
     }
 
