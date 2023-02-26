@@ -1,5 +1,6 @@
 <script>
     import { onDestroy } from 'svelte';
+    import { randomItem } from '@utils/array';
     import { randomInt } from '@utils/math';
     import { blobPaths } from '../blobs';
     import {
@@ -12,9 +13,7 @@
 
     const unsubscribe = LastTweenedBlobPath.subscribe(function (lastPath) {
         const inactiveBlobPaths = blobPaths.filter(path => path !== lastPath);
-
-        const nextPath =
-            inactiveBlobPaths[randomInt(0, inactiveBlobPaths.length - 1)];
+        const nextPath = randomItem(inactiveBlobPaths);
 
         NexTweenedBlobPath.set(nextPath);
 

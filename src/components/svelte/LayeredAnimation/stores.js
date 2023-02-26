@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { easings, customEasings } from '@utils/animation';
-import { randomFloat, randomInt } from '@utils/math';
+import { randomItem } from '@utils/array';
+import { randomFloat } from '@utils/math';
 import { maxDuration, minDuration } from './config';
 
 const initialDuration = {
@@ -24,11 +25,10 @@ export const randomize = function () {
     DurationX.set(randomFloat(minDuration, maxDuration));
     DurationY.set(randomFloat(minDuration, maxDuration));
 
-    const easingX = easingNames[randomInt(0, easingNames.length - 1)];
-
-    const easingY = easingNames.filter(easing => easing !== easingX)[
-        easingNames.length - 2
-    ];
+    const easingX = randomItem(easingNames);
+    const easingY = randomItem(
+        easingNames.filter(easing => easing !== easingX)
+    );
 
     EasingX.set(easingX);
     EasingY.set(easingY);

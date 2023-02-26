@@ -1,4 +1,3 @@
-// import { interpolate } from 'polymorph-js';
 import { interpolateString as interpolate } from 'd3-interpolate';
 import { get, writable } from 'svelte/store';
 import { tweened } from 'svelte/motion';
@@ -10,12 +9,8 @@ export const LastTweenedBlobPath = writable(blobPaths[0]);
 export const NexTweenedBlobPath = writable();
 export const FillBlobs = writable(true);
 
-export const BlobPathTweened = tweened(blobPaths[0], {
+export const BlobPathTweened = tweened(get(LastTweenedBlobPath), {
     duration: get(Duration),
     easing: sineInOut,
-    // todo: compare performance with polymorph-js
     interpolate,
-    // interpolate: function (prevPath, nextPath) {
-    //     return interpolate([prevPath, nextPath]);
-    // },
 });
