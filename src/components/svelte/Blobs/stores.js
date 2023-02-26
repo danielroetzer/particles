@@ -6,7 +6,7 @@ import { blobPaths } from './blobs';
 
 export const Duration = writable(1000);
 export const LastTweenedBlobPath = writable(blobPaths[0]);
-export const NexTweenedBlobPath = writable();
+export const NextTweenedBlobPath = writable();
 export const FillBlobs = writable(true);
 
 export const BlobPathTweened = tweened(get(LastTweenedBlobPath), {

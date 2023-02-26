@@ -1,21 +1,20 @@
 <script>
     import { onDestroy } from 'svelte';
     import { randomItem } from '@utils/array';
-    import { randomInt } from '@utils/math';
     import { blobPaths } from '../blobs';
     import {
         BlobPathTweened,
         Duration,
         FillBlobs,
         LastTweenedBlobPath,
-        NexTweenedBlobPath,
+        NextTweenedBlobPath,
     } from '../stores';
 
     const unsubscribe = LastTweenedBlobPath.subscribe(function (lastPath) {
         const inactiveBlobPaths = blobPaths.filter(path => path !== lastPath);
         const nextPath = randomItem(inactiveBlobPaths);
 
-        NexTweenedBlobPath.set(nextPath);
+        NextTweenedBlobPath.set(nextPath);
 
         // On tween completion, we set the blob path as completed.
         // This causes the subscription to trigger again, which starts the next tween.
