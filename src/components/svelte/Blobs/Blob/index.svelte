@@ -1,26 +1,24 @@
 <script>
     import { onDestroy } from 'svelte';
-    import { randomItem } from '@utils/array';
-    import { blobPaths } from '../blobs';
+    import { setNextBlobPath } from './helpers';
+
     import {
         BlobPathTweened,
+        Complexity,
         Duration,
+        PointCount,
+        Easing,
         FillBlobs,
         LastTweenedBlobPath,
-        NextTweenedBlobPath,
     } from '../stores';
 
-    const unsubscribe = LastTweenedBlobPath.subscribe(function (lastPath) {
-        const inactiveBlobPaths = blobPaths.filter(path => path !== lastPath);
-        const nextPath = randomItem(inactiveBlobPaths);
-
-        NextTweenedBlobPath.set(nextPath);
-
-        // On tween completion, we set the blob path as completed.
-        // This causes the subscription to trigger again, which starts the next tween.
-        BlobPathTweened.set(nextPath, { duration: $Duration }).then(() =>
-            LastTweenedBlobPath.set(nextPath)
-        );
+    const unsubscribe = LastTweenedBlobPath.subscribe(function () {
+        setNextBlobPath({
+            pointCount: $PointCount,
+            complexity: $Complexity,
+            duration: $Duration,
+            easing: $Easing,
+        });
     });
 
     onDestroy(unsubscribe);
@@ -32,11 +30,7 @@
     viewBox="0 0 200 200"
     xmlns="http://www.w3.org/2000/svg"
 >
-    <path
-        d={$BlobPathTweened}
-        transform="translate(100 100)"
-        class:no-fill={!$FillBlobs}
-    />
+    <path d={$BlobPathTweened} class:no-fill={!$FillBlobs} />
 </svg>
 
 <style>

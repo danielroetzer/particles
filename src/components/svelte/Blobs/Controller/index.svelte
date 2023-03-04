@@ -1,9 +1,24 @@
 <script>
+    import EasingSelect from './EasingSelect.svelte';
     import DurationSlider from './DurationSlider.svelte';
     import FillCheckbox from './FillCheckbox.svelte';
+    import PointCountSlider from './PointCountSlider.svelte';
+    import ComplexitySlider from './ComplexitySlider.svelte';
 </script>
 
 <div class="root">
+    <div class="controller">
+        <EasingSelect />
+    </div>
+
+    <div class="controller">
+        <PointCountSlider />
+    </div>
+
+    <div class="controller">
+        <ComplexitySlider />
+    </div>
+
     <div class="controller">
         <DurationSlider />
     </div>
