@@ -1,5 +1,5 @@
 <script>
-    import { onDestroy } from 'svelte';
+    import { onMount } from 'svelte';
     import { setNextBlobPath, setNextHue } from './helpers';
     import { hueStep } from '../config';
 
@@ -16,25 +16,27 @@
         HueTweened,
     } from '../stores';
 
-    const unsubscribeBlob = LastTweenedBlobPath.subscribe(function () {
-        setNextBlobPath({
-            pointCount: $PointCount,
-            complexity: $Complexity,
-            duration: $Duration,
-            easing: $Easing,
+    onMount(function () {
+        const unsubscribeBlob = LastTweenedBlobPath.subscribe(function () {
+            setNextBlobPath({
+                pointCount: $PointCount,
+                complexity: $Complexity,
+                duration: $Duration,
+                easing: $Easing,
+            });
         });
-    });
 
-    const unsubscribeHue = LastHue.subscribe(function (lastHue) {
-        setNextHue({
-            lastHue,
-            duration: $HueDuration,
+        const unsubscribeHue = LastHue.subscribe(function (lastHue) {
+            setNextHue({
+                lastHue,
+                duration: $HueDuration,
+            });
         });
-    });
 
-    onDestroy(function () {
-        unsubscribeBlob();
-        unsubscribeHue();
+        return function () {
+            unsubscribeBlob();
+            unsubscribeHue();
+        };
     });
 </script>
 
