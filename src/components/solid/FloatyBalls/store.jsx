@@ -1,4 +1,5 @@
 import { createStore } from 'solid-js/store';
+import { randomItem } from '@utils/array';
 import { randomFloat, randomHexColor, randomInt } from '@utils/math';
 
 export const [floatyBalls, setFloatyBalls] = createStore({
@@ -43,7 +44,7 @@ const calcFloatyBallProps = function ({ index }) {
     };
 
     return {
-        color: floatyBalls.colors[randomInt(0, floatyBalls.colors.length - 1)],
+        color: randomItem(floatyBalls.colors),
         size: randomFloat(floatyBalls.size.min, floatyBalls.size.max),
         x: randomInt(0, 100),
         y: randomInt(0, 100),

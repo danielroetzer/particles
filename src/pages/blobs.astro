@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@layouts/Base.astro';
+import Blobs from '@components/svelte/Blobs/index.svelte';
+---
+
+<BaseLayout title="Blob svg path interpolation">
+    <Blobs client:load />
+</BaseLayout>
+
+<style is:global>
+    body {
+        background-color: #fefefe;
+    }
+</style>

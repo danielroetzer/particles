@@ -1,16 +1,5 @@
 export const easings = ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out'];
 
-export const bezierEasings = [
-    {
-        id: 'easeOutBack',
-        timingFunction: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-    },
-    {
-        id: 'easeInOutBack',
-        timingFunction: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-    },
-];
-
 // Copied from: https://easings.net/
 // There exists a postcss plugin, which converts the easing name to the corresponging bezier function, see: https://github.com/postcss/postcss-easings
 // However, this app updates easings dynamically with css variables, so the plugin wouldn't help in this case.

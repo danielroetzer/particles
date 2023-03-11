@@ -3,7 +3,7 @@ import {
     floatyBalls,
     setFloatyBalls,
 } from '@components/solid/FloatyBalls/store';
-import { removeIndex } from '@utils/array';
+import { randomItem, removeIndex } from '@utils/array';
 import { randomInt, randomHexColor } from '@utils/math';
 
 const changeColor = function (itemIndex, newColor) {
@@ -29,8 +29,7 @@ const deleteColor = function (itemIndex) {
             'list',
             item => item.color === oldColor,
             'color',
-            () =>
-                floatyBalls.colors[randomInt(0, floatyBalls.colors.length - 1)]
+            () => randomItem(floatyBalls.colors)
         );
     });
 };
