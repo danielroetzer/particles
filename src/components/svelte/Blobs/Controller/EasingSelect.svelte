@@ -1,11 +1,13 @@
 <script>
-    import { easingList } from './helpers';
+    import * as easings from 'svelte/easing';
 
     import {
         Easing,
         LastTweenedBlobPath,
         NextTweenedBlobPath,
     } from '../stores';
+
+    const easingList = Object.keys(easings);
 
     const setEasing = function (event) {
         Easing.set(event.target.value);

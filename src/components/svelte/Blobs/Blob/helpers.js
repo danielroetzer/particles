@@ -1,14 +1,17 @@
 import { curveBasisClosed, line } from 'd3-shape';
+import * as easings from 'svelte/easing';
 import { randomInt } from '@utils/math';
-import { easingFromName } from '../Controller/helpers';
+import { hueStep } from '../config';
 
 import {
     BlobPathTweened,
     LastTweenedBlobPath,
     NextTweenedBlobPath,
+    LastHue,
+    HueTweened,
 } from '../stores';
 
-// Logic for creating points was taken from:
+// Logic for creating points was inspired from:
 // https://georgefrancis.dev/writing/build-a-smooth-animated-blob-with-svg-and-js/
 const createBlobPoints = function (props) {
     const { count = 8, radius = 70, offset = 30 } = props;
@@ -23,7 +26,10 @@ const createBlobPoints = function (props) {
         const x = 100 + Math.cos(theta) * radiusWithOffset;
         const y = 100 + Math.sin(theta) * radiusWithOffset;
 
-        return { x, y };
+        return {
+            x: Math.min(180, x),
+            y: Math.min(180, y),
+        };
     });
 };
 
@@ -64,6 +70,26 @@ export const setNextBlobPath = function (props) {
     // This causes the subscription to trigger again, which starts the next tween.
     BlobPathTweened.set(nextPath, {
         duration,
-        easing: easing ? easingFromName(easing) : undefined,
+        easing: easing ? easings[easing] : undefined,
     }).then(() => LastTweenedBlobPath.set(nextPath));
+};
+
+let isHueForward = false;
+
+export const setNextHue = function (props) {
+    const {
+        lastHue,
+        // optional
+        duration,
+    } = props;
+
+    if (lastHue >= 360) {
+        isHueForward = false;
+    } else if (lastHue <= 0) {
+        isHueForward = true;
+    }
+
+    const nextHue = isHueForward ? lastHue + hueStep : lastHue - hueStep;
+
+    HueTweened.set(nextHue, { duration }).then(() => LastHue.set(nextHue));
 };

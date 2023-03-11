@@ -1,6 +1,7 @@
 <script>
     import { onDestroy } from 'svelte';
-    import { setNextBlobPath } from './helpers';
+    import { setNextBlobPath, setNextHue } from './helpers';
+    import { hueStep } from '../config';
 
     import {
         BlobPathTweened,
@@ -10,9 +11,12 @@
         Easing,
         FillBlobs,
         LastTweenedBlobPath,
+        LastHue,
+        HueDuration,
+        HueTweened,
     } from '../stores';
 
-    const unsubscribe = LastTweenedBlobPath.subscribe(function () {
+    const unsubscribeBlob = LastTweenedBlobPath.subscribe(function () {
         setNextBlobPath({
             pointCount: $PointCount,
             complexity: $Complexity,
@@ -21,7 +25,17 @@
         });
     });
 
-    onDestroy(unsubscribe);
+    const unsubscribeHue = LastHue.subscribe(function (lastHue) {
+        setNextHue({
+            lastHue,
+            duration: $HueDuration,
+        });
+    });
+
+    onDestroy(function () {
+        unsubscribeBlob();
+        unsubscribeHue();
+    });
 </script>
 
 <svg
@@ -30,19 +44,27 @@
     viewBox="0 0 200 200"
     xmlns="http://www.w3.org/2000/svg"
 >
+    <defs>
+        <linearGradient id="blob-gradient" gradientTransform="rotate(90)">
+            <stop offset="0%" stop-color={`hsl(${$HueTweened}, 100%, 75%)`} />
+            <stop
+                offset="100%"
+                stop-color={`hsl(${$HueTweened + hueStep}, 100%, 75%)`}
+            />
+        </linearGradient>
+    </defs>
     <path d={$BlobPathTweened} class:no-fill={!$FillBlobs} />
 </svg>
 
 <style>
     svg {
         max-height: 500px;
-        --color: #ff0066;
         --stroke-width: 2px;
     }
 
     path {
-        fill: var(--color);
-        stroke: var(--color);
+        fill: url(#blob-gradient);
+        stroke: url(#blob-gradient);
         stroke-width: var(--stroke-width);
     }
 
