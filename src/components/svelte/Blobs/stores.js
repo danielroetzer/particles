@@ -16,7 +16,7 @@ export const LastTweenedBlobPath = writable(
     })
 );
 export const NextTweenedBlobPath = writable();
-export const BlobPathTweened = tweened(get(LastTweenedBlobPath), {
+export const BlobPathTweened = tweened(null, {
     duration: get(Duration),
     easing: easings[get(Easing)],
     interpolate: interpolateString,
