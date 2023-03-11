@@ -1,5 +1,5 @@
-import { interpolateString as interpolate } from 'd3-interpolate';
-import { get, writable } from 'svelte/store';
+import { interpolateString } from 'd3-interpolate';
+import { derived, get, writable } from 'svelte/store';
 import { tweened } from 'svelte/motion';
 import * as easings from 'svelte/easing';
 import { generateRandomBlobPath } from './Blob/helpers';
@@ -15,11 +15,16 @@ export const LastTweenedBlobPath = writable(
         count: get(PointCount),
     })
 );
-
 export const NextTweenedBlobPath = writable();
-
 export const BlobPathTweened = tweened(get(LastTweenedBlobPath), {
     duration: get(Duration),
     easing: easings[get(Easing)],
-    interpolate,
+    interpolate: interpolateString,
+});
+
+export const HueDuration = derived(Duration, duration => duration + 200);
+export const LastHue = writable(0);
+export const HueTweened = tweened(get(LastHue), {
+    duration: get(HueDuration),
+    easing: easings.linear,
 });

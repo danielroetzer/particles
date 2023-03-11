@@ -4,4 +4,4 @@
 
 <input id="fill-checkbox" type="checkbox" bind:checked={$FillBlobs} />
 
-<label for="fill-checkbox">Fill Blobs</label>
+<label for="fill-checkbox">Fill Blob</label>
