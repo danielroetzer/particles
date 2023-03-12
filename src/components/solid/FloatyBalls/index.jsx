@@ -34,6 +34,7 @@ const FloatyBall = function (props) {
             props.item.animation.keyframes,
             props.item.animation.options
         );
+
         setFloatyBalls(
             'list',
             untrack(() => props.index),
