@@ -14,7 +14,7 @@
     bind:value={$PointCount}
     on:input={function (event) {
         setNextBlobPath({
-            pointCount: event.target.value,
+            pointCount: parseInt(event.target.value),
             complexity: $Complexity,
             duration: 0,
         });

@@ -15,7 +15,7 @@
     on:input={function (event) {
         setNextBlobPath({
             pointCount: $PointCount,
-            complexity: event.target.value,
+            complexity: parseInt(event.target.value),
             duration: 0,
         });
     }}

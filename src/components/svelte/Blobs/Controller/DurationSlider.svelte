@@ -1,6 +1,12 @@
 <script>
     import { setNextBlobPath, setNextHue } from '../Blob/helpers';
-    import { Complexity, Duration, PointCount, LastHue } from '../stores.js';
+    import {
+        Complexity,
+        Duration,
+        PointCount,
+        LastHue,
+        Easing,
+    } from '../stores.js';
 </script>
 
 <label for="duration-slider">Duration:</label>
@@ -16,12 +22,13 @@
         setNextBlobPath({
             pointCount: $PointCount,
             complexity: $Complexity,
-            duration: event.target.value,
+            duration: parseInt(event.target.value),
+            easing: $Easing,
         });
 
         setNextHue({
             lastHue: $LastHue,
-            duration: event.target.value,
+            duration: parseInt(event.target.value),
         });
     }}
 />
